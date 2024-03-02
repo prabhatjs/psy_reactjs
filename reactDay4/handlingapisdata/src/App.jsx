@@ -5,7 +5,7 @@ import Productapi from './api/Productapi';
 
 function App() {
   //create async function to handle api data,async function 
-  const [data,setProduct]=useState([]);
+  const [product,setProduct]=useState([]);
   //print on console
   const handleclick =async()=>{
     try {
@@ -29,21 +29,20 @@ function App() {
       console.log(error);
     }
   }
-  
+  //print on page and conditon render 
   return (
     <>
     <h1>City Data</h1>
       <button onClick={handleclick}>Get City Data</button>
       <button onClick={handleclickShowonPage}>Get Product Data</button>
-      <ul>
-        {data.map((item)=>{
+      <ul style={{listStyle:'none'}}>
+        {product.map((item)=>{
          return (
-          <li>
+          <li key={item.id}>
           <h3>{item.name}</h3>
           <p>{item.price}</p>
           </li>
          )
-         
         })}
       </ul>
     </>
