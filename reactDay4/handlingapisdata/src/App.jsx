@@ -4,6 +4,10 @@ import Fetchapi from './api/Fetchapi'
 import Productapi from './api/Productapi';
 import Transaction from './api/TransactionHistory';
 import EffectHook from './components/EffectHook';
+import Counter from './components/Counter';
+import DataOnPageLoad from './components/DataOnPageLoad';
+import GetDataAndFilter from './components/GetDataAndFilter';
+import UsingFakeStore from './components/UsingFakeStore';
 
 function App() {
   //create async function to handle api data,async function 
@@ -79,7 +83,12 @@ function App() {
         })}
       </ul>
       </div>
-      <EffectHook/>
+      {/* <EffectHook/> */}
+      {/* <Counter></Counter> */}
+      {/* <DataOnPageLoad></DataOnPageLoad> */}
+      <GetDataAndFilter></GetDataAndFilter>
+      <UsingFakeStore></UsingFakeStore>
+      
     </>
   )
 }
