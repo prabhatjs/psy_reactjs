@@ -1,10 +1,16 @@
  import React from "react"
- function Todos(){
+ function Todos({todos}){
     return (
         <div>
-            <h3>Get Up in the Morning</h3>
-            <p>As early As possible in morning</p>
-            <button>Mark as completed</button>
+          {
+            todos.map(function(todos){
+                return <div>
+                <h3>{todos.title}</h3>
+                <p>{todos.description}</p>
+                <button>{todos.completed=='true' ? "Completed":"Mark As complete"}</button>
+                </div>
+            })
+          }
         </div>
     )
  }

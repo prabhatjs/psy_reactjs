@@ -1,6 +1,7 @@
 const express=require("express");
 const { createTodos, updateTodos } = require("./typesz");
-
+const todo=require('./TodoSchema');
+const cors=require('cors')
 const app=express();
 /**
  * In Node.js, express.json() is middleware provided by the Express.js framework.
@@ -11,8 +12,8 @@ const app=express();
  * 
  **/
 app.use(express.json());
-
-app.post("/api/todo",function(req,res){
+app.use(cors({}));
+app.post("/api/todo", async function(req,res){
     const createPayload=req.body;
     const parsePayload=createTodos.safeParse(createPayload);
     if(!parsePayload.success){
@@ -21,14 +22,25 @@ app.post("/api/todo",function(req,res){
         })
         return;
     }
-    //
+    await todo.create({
+        title:createPayload.title,
+        description:createPayload.description,
+        completed:false,
+    })
+    res.json({
+        mesg:"Todo Created"
+    })
 })
 
-app.get("/api/todo",function(req,res){
+app.get("/api/todo", async function(req,res){
+    const todos=await todo.find({});
+    res.json({
+        todos
+    })
     
 })
 
-app.put("/api/todo",function(req,res){
+app.put("/api/todo/completed", async function(req,res){
     const updatePayload=req.body;
     const parsePayload=updateTodos.safeParse(updatePayload);
     if(!parsePayload.success){
@@ -36,13 +48,19 @@ app.put("/api/todo",function(req,res){
             mes:'You Send wrong input for update'
         })
     }
+    await todo.update({
+        _id:req.body.id
+    },
+        {
+            completed:true
+        })
+    res.json({
+            mesg:"todo marked as completed"
+    })
 })
 
 app.delete("/api/todo/:id",function(req,res){
     
 })
 
-const PORT=8080;
-app.listen(PORT,()=>{
-    console.log("Backend Start on ",PORT);
-});
+module.exports=app
