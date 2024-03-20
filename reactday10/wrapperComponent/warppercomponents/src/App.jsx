@@ -1,9 +1,10 @@
-import Main from "./components/Main"
+import Main from "./components/usingChildWrapper/Main"
 function App() {
 
 
   return (
     <>
+      {/* <Main></Main> */}
       <Main></Main>
     </>
   )
