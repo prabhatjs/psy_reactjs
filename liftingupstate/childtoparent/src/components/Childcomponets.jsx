@@ -4,7 +4,6 @@ function Childcomponets({changeword}) {
     
   return (
     <div>
-
         <button onClick={()=>changeword("Child")}>Change Heading</button>
     </div>
   )
